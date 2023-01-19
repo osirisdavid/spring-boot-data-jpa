@@ -2,7 +2,12 @@ package com.technolgyworld.springboot.app.model.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,12 +20,17 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty //Regla de Valdicacion para String, si o si es requerido el campo, cadena mayor que 0
+    @Size(min=3, max=20)
     private String nombre;
-
+    @jakarta.validation.constraints.NotEmpty
     private String apellido;
 
+    @jakarta.validation.constraints.NotEmpty
+    @Email
     private String email;
 
+    @NotNull
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
